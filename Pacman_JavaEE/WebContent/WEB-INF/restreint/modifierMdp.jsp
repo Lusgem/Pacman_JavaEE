@@ -8,7 +8,7 @@
     </head>
     <body>
     	<c:import url="/inc/menu.jsp" ></c:import>
-        <form method="post" action="<c:url value="/modifier" />">
+        <form method="post" action="<c:url value="/compte/modifier" />">
             <fieldset>
                 
                 <label for="ancienmdp">Ancien mot de passe <span class="requis">*</span></label>

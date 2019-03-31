@@ -71,7 +71,6 @@ public final class ModifierMdpForm {
 		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
         passwordEncryptor.setAlgorithm( ALGO_CHIFFREMENT );
         passwordEncryptor.setPlainDigest( false );
-        System.out.println(user.getMotDePasse());
 		if ( motDePasse != null ) {
 			if ( !passwordEncryptor.checkPassword(motDePasse, user.getMotDePasse()) ) {
 				throw new FormValidationException( "Le mot de passe est incorrect" );

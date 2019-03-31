@@ -19,7 +19,7 @@
 				${sessionScope.sessionUtilisateur.email} !</p>
 			<p>Vous êtes inscris depuis le :
 				${sessionScope.sessionUtilisateur.dateInscription}</p>
-			<a href="<c:url value="/modifier"/>">Modifier mon mot de passe</a>
+			<a href="<c:url value="/compte/modifier"/>">Modifier mon mot de passe</a>
 
 		</c:if>
 
