@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
@@ -17,6 +18,8 @@ public final class ModifierMdpForm {
 	public static final String PARAM_PSEUDO = "pseudo";
     public static final String  ATT_SESSION_USER          = "sessionUtilisateur";
 	private static final String ALGO_CHIFFREMENT = "SHA-256";
+	
+	private HttpServletRequest request;
 
 	private String              resultat;
 	private Map<String, String> erreurs      = new HashMap<String, String>();
@@ -37,6 +40,7 @@ public final class ModifierMdpForm {
 
 	public void modifierMotDePasse( HttpServletRequest request ) {
 		/* Récupération des champs du formulaire */
+		this.request =request;
 		String ancienMotDePasse = getValeurChamp( request, CHAMP_OLD_PASS );
 		String nouveauMotDePasse = getValeurChamp( request, CHAMP_NEW_PASS );
 		String nouveauMotDePasseConf = getValeurChamp(request, CHAMP_NEW_PASS_CONF);
@@ -107,6 +111,9 @@ public final class ModifierMdpForm {
         passwordEncryptor.setPlainDigest( false );
         String motDePasseChiffre = passwordEncryptor.encryptPassword( motDePasse );
         utilisateurDao.modifier(motDePasseChiffre,utilisateur.getPseudo());
+        utilisateur.setMotDePasse(motDePasseChiffre);
+        HttpSession session = request.getSession();
+        session.setAttribute(ATT_SESSION_USER, utilisateur);
     }
 
 	/*
