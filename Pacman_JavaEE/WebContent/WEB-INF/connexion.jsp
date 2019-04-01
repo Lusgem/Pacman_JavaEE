@@ -5,6 +5,7 @@
         <meta charset="utf-8" />
         <title>Connexion</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/form.css"/>" />
+        <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
     	<c:import url="/inc/menu.jsp" ></c:import>

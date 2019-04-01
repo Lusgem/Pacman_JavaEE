@@ -49,12 +49,10 @@ public final class ModifierMdpForm {
 		/* Validation du champ mot de passe. */
 		try {
 			validationAncienMotDePasse( ancienMotDePasse );
+			traiterNouveauMotDePasse(nouveauMotDePasse,nouveauMotDePasseConf,user);
 		} catch ( FormValidationException e ) {
 			setErreur( CHAMP_OLD_PASS, e.getMessage() );
 		}
-		traiterNouveauMotDePasse(nouveauMotDePasse,nouveauMotDePasseConf,user);
-		
-		
 		
 
 		/* Initialisation du résultat global de la validation. */
