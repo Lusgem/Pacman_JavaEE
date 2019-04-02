@@ -112,7 +112,6 @@ public final class ModifierMdpForm {
             setErreur( CHAMP_NEW_PASS_CONF, null );
         }
 
-        
     }
 
 	/*
