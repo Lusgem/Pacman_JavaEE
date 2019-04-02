@@ -99,19 +99,20 @@ public final class ModifierMdpForm {
 	private void traiterNouveauMotDePasse( String motDePasse, String confirmation, Utilisateur utilisateur ) {
         try {
             validationNouveauMotDePasse( motDePasse, confirmation );
+            ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+            passwordEncryptor.setAlgorithm( ALGO_CHIFFREMENT );
+            passwordEncryptor.setPlainDigest( false );
+            String motDePasseChiffre = passwordEncryptor.encryptPassword( motDePasse );
+            utilisateurDao.modifier(motDePasseChiffre,utilisateur.getPseudo());
+            utilisateur.setMotDePasse(motDePasseChiffre);
+            HttpSession session = request.getSession();
+            session.setAttribute(ATT_SESSION_USER, utilisateur);
         } catch ( FormValidationException e ) {
             setErreur( CHAMP_NEW_PASS, e.getMessage() );
             setErreur( CHAMP_NEW_PASS_CONF, null );
         }
 
-        ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
-        passwordEncryptor.setAlgorithm( ALGO_CHIFFREMENT );
-        passwordEncryptor.setPlainDigest( false );
-        String motDePasseChiffre = passwordEncryptor.encryptPassword( motDePasse );
-        utilisateurDao.modifier(motDePasseChiffre,utilisateur.getPseudo());
-        utilisateur.setMotDePasse(motDePasseChiffre);
-        HttpSession session = request.getSession();
-        session.setAttribute(ATT_SESSION_USER, utilisateur);
+        
     }
 
 	/*
